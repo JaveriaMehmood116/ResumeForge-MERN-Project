@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #12365b;
+  --primary-strong: #0f2a43;
+  --primary-soft: #e6edf6;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --border: #e5e7eb;
+  --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  --radius: 12px;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(circle at 20% 20%, #eef2ff 0, transparent 30%),
+    radial-gradient(circle at 80% 0%, #e0f2fe 0, transparent 28%),
+    #f5f7fb;
+  color: var(--text);
+}
+
+code {
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
