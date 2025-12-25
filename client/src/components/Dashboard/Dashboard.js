@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosConfig';
 import './Dashboard.css';
 
 const Dashboard = ({ user, onLogout }) => {
@@ -15,10 +15,7 @@ const Dashboard = ({ user, onLogout }) => {
 
   const fetchResumes = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`/api/resumes/user/${user.id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.get(`/api/resumes/user/${user.id}`);
       setResumes(response.data);
       if (response.data?.length && !selectedResumeId) {
         setSelectedResumeId(response.data[0]._id);
@@ -41,10 +38,7 @@ const Dashboard = ({ user, onLogout }) => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this resume?')) {
       try {
-        const token = localStorage.getItem('token');
-        await axios.delete(`/api/resumes/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.delete(`/api/resumes/${id}`);
         fetchResumes();
       } catch (error) {
         console.error('Error deleting resume:', error);

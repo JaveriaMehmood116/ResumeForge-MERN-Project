@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosConfig';
 import PersonalInfo from './PersonalInfo';
 import Experience from './Experience';
 import Education from './Education';
@@ -54,10 +54,7 @@ const ResumeBuilder = ({ user }) => {
   const fetchResume = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`/api/resumes/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.get(`/api/resumes/${id}`);
       setResume(response.data);
     } catch (error) {
       console.error('Error fetching resume:', error);
@@ -71,15 +68,10 @@ const ResumeBuilder = ({ user }) => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const token = localStorage.getItem('token');
       if (id) {
-        await axios.put(`/api/resumes/${id}`, resume, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.put(`/api/resumes/${id}`, resume);
       } else {
-        const response = await axios.post('/api/resumes', resume, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await api.post('/api/resumes', resume);
         navigate(`/builder/${response.data._id}`);
       }
       alert('Resume saved successfully!');
