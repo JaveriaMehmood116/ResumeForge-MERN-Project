@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axiosConfig';
 import './Auth.css';
 
 const Register = ({ onLogin }) => {
@@ -35,7 +35,7 @@ const Register = ({ onLogin }) => {
 
     try {
       const { confirmPassword, ...registerData } = formData;
-      const response = await axios.post('/api/users/register', registerData);
+      const response = await api.post('/api/users/register', registerData);
       onLogin(response.data.user, response.data.token);
       navigate('/dashboard');
     } catch (err) {
